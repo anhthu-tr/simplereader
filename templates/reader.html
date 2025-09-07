@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+     <meta charset="UTF-8">
+     <title>Trình đọc đơn giản</title>
+     <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+     <header>
+          <form method="POST" enctype="multipart/form-data">
+               <input type="text" name="link" placeholder="Dán link web vào đây...">
+               <input type="file" name="file">
+               <button type="submit">Chuyển đổi</button>
+          </form>
+     </header>
+
+     <div id="menu">
+          <button onclick="toggleTheme()">🌙 Nền</button>
+          <button onclick="changeFontSize(1)">🔼 Chữ</button>
+          <button onclick="changeFontSize(-1)">🔽 Chữ</button>
+          <button onclick="scrollToTop()">⬆️</button>
+          <button onclick="resetContent()">🔄 Reset</button>
+          <form method="POST" action="/save">
+               <input type="hidden" name="format" value="pdf">
+               <button type="submit">📄 Lưu PDF</button>
+          </form>
+          <form method="POST" action="/save">
+               <input type="hidden" name="format" value="txt">
+               <button type="submit">📄 Lưu TXT</button>
+          </form>
+          <form method="POST" action="/save">
+               <input type="hidden" name="format" value="epub">
+               <button type="submit">📄 Lưu EPUB</button>
+          </form>
+     </div>
+
+     <main>
+          <pre>{{ content }}</pre>
+     </main>
+
+     <script>
+          function toggleTheme() {
+               document.body.classList.toggle('dark');
+          }
+          function changeFontSize(delta) {
+               const main = document.querySelector('main');
+               const size = parseFloat(window.getComputedStyle(main).fontSize);
+               main.style.fontSize = (size + delta) + 'px';
+          }
+          function scrollToTop() {
+               window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+          function resetContent() {
+               window.location.href = "/";
+          }
+     </script>
+</body>
+
+</html>

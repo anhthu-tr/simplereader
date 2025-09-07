@@ -1,0 +1,8 @@
+flask
+pdfplumber
+requests
+readability-lxml
+beautifulsoup4
+fpdf
+ebooklib
+gunicorn
